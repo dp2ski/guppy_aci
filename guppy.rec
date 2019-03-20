@@ -1,0 +1,38 @@
+Bootstrap: docker
+From: centos:centos7
+
+%runscript
+    exec /opt/guppy/guppy_basecaller "$@"
+
+%post
+    # commands to be executed inside container during bootstrap
+    yum update -y
+    yum install -y epel-release
+    yum install -y terminator
+    yum install -y centos-release-scl
+    yum install -y vte-devel
+    yum install -y vte291-devel
+    yum install -y vte-profile
+    yum install -y devtoolset-7-gcc*
+    scl enable devtoolset-7 bash
+    yum -y groups install "Development Tools"
+    yum -y groups install "Base"
+    yum -y install git cmake gcc-c++ gcc binutils \
+    libX11-devel libXpm-devel libXft-devel libXext-devel
+    yum -y install gcc-gfortran openssl-devel pcre-devel \
+    mesa-libGL-devel mesa-libGLU-devel glew-devel ftgl-devel mysql-devel \
+    fftw-devel cfitsio-devel graphviz-devel \
+    avahi-compat-libdns_sd-devel libldap-dev python-devel \
+    libxml2-devel gsl-devel
+
+    mkdir -p /opt/guppy/
+    cd /opt/guppy
+    wget https://mirror.oxfordnanoportal.com/software/analysis/ont-guppy-2.3.5-1.el7.x86_64.rpm
+    yum install /opt/guppy/ont-guppy-2.3.5-1.el7.x86_64.rpm
+
+    #ACI mappings
+    mkdir -p /storage/home
+    mkdir -p /storage/work
+    mkdir -p /gpfs/group
+    mkdir -p /gpfs/scratch
+    mkdir -p /var/spool/torque
