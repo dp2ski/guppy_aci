@@ -28,7 +28,7 @@ From: centos:centos7
     mkdir -p /opt/guppy/
     cd /opt/guppy
     wget https://mirror.oxfordnanoportal.com/software/analysis/ont-guppy-2.3.5-1.el7.x86_64.rpm
-    yum install /opt/guppy/ont-guppy-2.3.5-1.el7.x86_64.rpm
+    yum -y install /opt/guppy/ont-guppy-2.3.5-1.el7.x86_64.rpm
 
     #ACI mappings
     mkdir -p /storage/home
