@@ -2,7 +2,10 @@ Bootstrap: docker
 From: centos:centos7
 
 %runscript
-    exec /opt/guppy/guppy_basecaller "$@"
+    exec /opt/guppy/ont-guppy-cpu/bin/guppy_basecaller "$@"
+
+%environment
+    PATH = /opt/guppy/ont-guppy-cpu/bin/:$PATH
 
 %post
     # commands to be executed inside container during bootstrap
@@ -27,8 +30,8 @@ From: centos:centos7
 
     mkdir -p /opt/guppy/
     cd /opt/guppy
-    wget https://mirror.oxfordnanoportal.com/software/analysis/ont-guppy-2.3.5-1.el7.x86_64.rpm
-    yum -y install /opt/guppy/ont-guppy-2.3.5-1.el7.x86_64.rpm
+    wget https://mirror.oxfordnanoportal.com/software/analysis/ont-guppy-cpu_2.3.5_linux64.tar.gz
+    tar -xzvf ont-guppy-cpu_2.3.5_linux64.tar.gz
 
     #ACI mappings
     mkdir -p /storage/home
