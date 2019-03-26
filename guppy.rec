@@ -5,7 +5,7 @@ From: centos:centos7
     exec /opt/guppy/ont-guppy-cpu/bin/guppy_basecaller "$@"
 
 %environment
-    PATH = /opt/guppy/ont-guppy-cpu/bin/:$PATH
+    export PATH = /opt/guppy/ont-guppy-cpu/bin/:$PATH
 
 %post
     # commands to be executed inside container during bootstrap
